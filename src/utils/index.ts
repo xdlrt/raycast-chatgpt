@@ -45,5 +45,5 @@ export function chatTransfomer(chat: Chat[], prompt: string): Message[] {
 export const getConfigUrl = (params: ConfigurationPreferences) => {
   if (params.useAzure) return params.azureEndpoint + "/openai/deployments/" + params.azureDeployment;
   if (params.useApiEndpoint) return params.apiEndpoint;
-  return "https://api.openai.com/v1";
+  return;
 };

@@ -3,7 +3,7 @@ import { getPreferenceValues } from "@raycast/api";
 import OpenAI, { ClientOptions } from "openai";
 import { useState } from "react";
 import { ConfigurationPreferences } from "../type";
-// import { getConfigUrl } from "../utils";
+import { getConfigUrl } from "../utils";
 
 export function useChatGPT(): OpenAI {
   const [chatGPT] = useState(() => {
@@ -15,7 +15,10 @@ export function useChatGPT(): OpenAI {
       });
     };
     const config = getConfig(preferences);
-    config.httpAgent = new HttpsProxyAgent('http://127.0.0.1:8118');
+    const { proxyProtocol, proxyHost, proxyPort } = preferences;
+    if (proxyProtocol && proxyHost && proxyPort) {
+      config.httpAgent = new HttpsProxyAgent(`${proxyProtocol}://${proxyHost}:${proxyPort}`);
+    }
     return new OpenAI(config);
   });
   return chatGPT;

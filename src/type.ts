@@ -124,4 +124,7 @@ export interface ConfigurationPreferences {
   azureDeployment: string;
   useApiEndpoint: boolean;
   apiEndpoint: string;
+  proxyProtocol?: string;
+  proxyHost?: string;
+  proxyPort?: string;
 }

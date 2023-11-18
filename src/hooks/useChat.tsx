@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from "uuid";
 import { Chat, ChatHook, Model } from "../type";
 import { chatTransfomer } from "../utils";
 import { useAutoTTS } from "./useAutoTTS";
-import { getConfiguration, useChatGPT } from "./useChatGPT";
+import { useChatGPT } from "./useChatGPT";
 import { useHistory } from "./useHistory";
 import OpenAI from "openai";
 
@@ -53,17 +53,6 @@ export function useChat<T extends Chat>(props: T[]): ChatHook {
     setTimeout(async () => {
       setSelectedChatId(chat.id);
     }, 50);
-
-    const getHeaders = function () {
-      const config = getConfiguration();
-      if (!config.useAzure) {
-        return { apiKey: "", params: {} };
-      }
-      return {
-        apiKey: config.apiKey,
-        params: { "api-version": "2023-03-15-preview" },
-      };
-    };
 
     try {
       if (useStream) {
