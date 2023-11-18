@@ -2,12 +2,11 @@ import { clearSearchBar, getPreferenceValues, showToast, Toast } from "@raycast/
 import { useCallback, useMemo, useState } from "react";
 import say from "say";
 import { v4 as uuidv4 } from "uuid";
-import { Chat, ChatHook, CreateChatCompletionDeltaResponse, Model } from "../type";
+import { Chat, ChatHook, Model } from "../type";
 import { chatTransfomer } from "../utils";
 import { useAutoTTS } from "./useAutoTTS";
 import { getConfiguration, useChatGPT } from "./useChatGPT";
 import { useHistory } from "./useHistory";
-import { useProxy } from "./useProxy";
 import OpenAI from "openai";
 
 export function useChat<T extends Chat>(props: T[]): ChatHook {
@@ -29,7 +28,6 @@ export function useChat<T extends Chat>(props: T[]): ChatHook {
 
   const history = useHistory();
   const isAutoTTS = useAutoTTS();
-  const proxy = useProxy();
   const chatGPT = useChatGPT();
 
   async function ask(question: string, model: Model) {
@@ -66,8 +64,6 @@ export function useChat<T extends Chat>(props: T[]): ChatHook {
         params: { "api-version": "2023-03-15-preview" },
       };
     };
-
-    console.log(proxy);
 
     try {
       if (useStream) {

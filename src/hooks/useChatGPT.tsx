@@ -16,7 +16,6 @@ export function useChatGPT(): OpenAI {
     };
     const config = getConfig(preferences);
     config.httpAgent = new HttpsProxyAgent('http://127.0.0.1:8118');
-    console.log(config, JSON.stringify(config.httpAgent));
     return new OpenAI(config);
   });
   return chatGPT;

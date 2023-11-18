@@ -30,7 +30,6 @@ export function useModel(): ModelHook {
           setOption(models.filter((m) => m.id.startsWith("gpt")).map((x) => x.id));
         })
         .catch(async (err) => {
-          console.error(err);
           if (!(err instanceof Error || err.message)) {
             return;
           }
